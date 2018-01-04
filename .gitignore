@@ -1,3 +1,4 @@
 .DS_Store
 cocos/platform/android/libcocos2dx/build
-
+build/cocos2d_libs.xcodeproj/xcuserdata
+cocos/platform/android/libcocos2dx/libcocos2dx.iml
