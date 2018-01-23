@@ -29,6 +29,7 @@
 
 #include "extensions/Particle3D/PU/CCPUAffector.h"
 #include "base/ccTypes.h"
+#include <map> //@guilardi
 
 NS_CC_BEGIN
 

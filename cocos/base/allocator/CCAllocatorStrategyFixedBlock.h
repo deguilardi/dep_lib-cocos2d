@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2014-2016 Chukong Technologies Inc.
+ Copyright (c) 2014-2017 Chukong Technologies Inc.
  Author: Justin Graham (https://github.com/mannewalis)
  
  http://www.cocos2d-x.org
@@ -89,14 +89,13 @@ public:
         AllocatorDiagnostics::instance()->untrackAllocator(this);
 #endif
 
-        do
+        while (_pages)
         {
             intptr_t* page = (intptr_t*)_pages;
             intptr_t* next = (intptr_t*)*page;
             ccAllocatorGlobal.deallocate(page);
             _pages = (void*)next;
         }
-        while (_pages);
     }
     
     // @brief

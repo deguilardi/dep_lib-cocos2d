@@ -1,6 +1,6 @@
 /****************************************************************************
  Copyright (c) 2014 cocos2d-x.org
- Copyright (c) 2014 Chukong Technologies Inc.
+ Copyright (c) 2014-2017 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
 
@@ -136,6 +136,11 @@ CC_DLL jstring newStringUTFJNI(JNIEnv* env, const std::string& utf8Str, bool* re
  *  @brief Trims the unicode spaces at the end of char16_t vector.
  */
 CC_DLL void trimUTF16Vector(std::vector<char16_t>& str);
+    
+/**
+ *  @brief Trims the unicode spaces at the end of char32_t vector.
+ */
+CC_DLL void trimUTF32Vector(std::vector<char32_t>& str);
 
 /**
  *  @brief Whether the character is a whitespace character.
@@ -145,7 +150,7 @@ CC_DLL void trimUTF16Vector(std::vector<char16_t>& str);
  *  @see http://en.wikipedia.org/wiki/Whitespace_character#Unicode
  *
  */
-CC_DLL bool isUnicodeSpace(char16_t ch);
+CC_DLL bool isUnicodeSpace(char32_t ch);
 
 /**
  *  @brief Whether the character is a Chinese/Japanese/Korean character.
@@ -156,7 +161,7 @@ CC_DLL bool isUnicodeSpace(char16_t ch);
  *  @see http://tieba.baidu.com/p/748765987
  *
  */
-CC_DLL bool isCJKUnicode(char16_t ch);
+CC_DLL bool isCJKUnicode(char32_t ch);
 
 /**
  *  @brief Returns the length of the string in characters.
@@ -191,7 +196,7 @@ public:
     struct CharUTF8
     {
         std::string _char;
-        bool isAnsi() { return _char.size() == 1; }
+        bool isASCII() const { return _char.size() == 1; }
     };
     typedef std::vector<CharUTF8> CharUTF8Store;
 
@@ -203,12 +208,15 @@ public:
     void replace(const std::string& newStr);
 
     std::string getAsCharSequence() const;
+    std::string getAsCharSequence(std::size_t pos) const;
+    std::string getAsCharSequence(std::size_t pos, std::size_t len) const;
 
     bool deleteChar(std::size_t pos);
     bool insert(std::size_t pos, const std::string& insertStr);
     bool insert(std::size_t pos, const StringUTF8& insertStr);
 
     CharUTF8Store& getString() { return _str; }
+    const CharUTF8Store& getString() const { return _str; }
 
 private:
     CharUTF8Store _str;

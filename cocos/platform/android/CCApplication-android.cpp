@@ -1,6 +1,6 @@
 /****************************************************************************
 Copyright (c) 2010-2012 cocos2d-x.org
-Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2013-2017 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "platform/CCPlatformConfig.h"
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
+#include "platform/android/jni/Java_org_cocos2dx_lib_Cocos2dxEngineDataManager.h"
 #include "platform/android/jni/JniHelper.h"
 #include "platform/CCApplication.h"
 #include "base/CCDirector.h"
@@ -74,8 +75,14 @@ int Application::run()
     return -1;
 }
 
-void Application::setAnimationInterval(float interval) {
-    JniHelper::callStaticVoidMethod("org/cocos2dx/lib/Cocos2dxRenderer", "setAnimationInterval", interval);
+void Application::setAnimationInterval(float interval)
+{
+    setAnimationInterval(interval, SetIntervalReason::BY_ENGINE);
+}
+
+void Application::setAnimationInterval(float interval, SetIntervalReason reason)
+{
+    EngineDataManager::setAnimationInterval(interval, reason);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -102,6 +109,7 @@ const char * Application::getCurrentLanguageCode()
     return code;
 }
 
+// @guilardi
 const char * Application::getCurrentCountryCode(){
     static char code[3]={0};
     std::string language = JniHelper::callStaticStringMethod(helperClassName, "getCurrentCountry");
