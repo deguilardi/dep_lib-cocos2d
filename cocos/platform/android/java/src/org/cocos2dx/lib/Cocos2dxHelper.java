@@ -275,6 +275,11 @@ public class Cocos2dxHelper {
     public static String getCurrentLanguage() {
         return Locale.getDefault().getLanguage();
     }
+
+    // @guilardi
+    public static String getCurrentCountry(){
+        return Locale.getDefault().getCountry();
+    }
     
     public static String getDeviceModel(){
         return Build.MODEL;
