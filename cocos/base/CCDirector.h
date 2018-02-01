@@ -582,6 +582,12 @@ public:
      */
     bool isValid() const { return !_invalid; }
 
+    // @guilardi
+    // tower defense velocity
+    float _timeRate;
+    void setTimeRate(float value) { _timeRate = value; }
+    float getTimeRate()const { return _timeRate; }
+
 protected:
     void reset();
     

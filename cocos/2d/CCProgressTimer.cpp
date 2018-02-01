@@ -78,7 +78,14 @@ bool ProgressTimer::initWithSprite(Sprite* sp)
     setSprite(sp);
 
     // shader state
-    setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR, sp->getTexture()));
+    // @guilardi
+    // ml progressbar factory sends nullptr texture
+    if( sp ){
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR, sp->getTexture()));
+    }
+    else{
+        setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR));
+    }
     return true;
 }
 
