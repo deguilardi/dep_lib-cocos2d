@@ -184,11 +184,6 @@ public:
     static CameraBackgroundColorBrush* create(const Color4F& color, float depth);
     
     /**
-     * Draw background
-     */
-    virtual void drawBackground(Camera* camera) override;
-    
-    /**
      * Set clear color
      * @param color Color used to clear the color buffer
      */

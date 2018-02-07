@@ -226,7 +226,7 @@ void LabelTTF::setTextDefinition(const FontDefinition& theDefinition)
 const FontDefinition& LabelTTF::getTextDefinition()
 {
     auto fontDef = _renderLabel->getFontDefinition();
-    _fontDef = fontDef;
+    memcpy(&_fontDef, &fontDef, sizeof(FontDefinition));
     return _fontDef;
 }
 

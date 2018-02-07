@@ -204,8 +204,7 @@ public class Cocos2dxEditBoxHelper {
                             editBox.endAction = Cocos2dxEditBox.kEndActionNext;
                             Cocos2dxEditBoxHelper.closeKeyboardOnUiThread(index);
                             return true;
-                        } else if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_GO) {
-                            editBox.endAction = Cocos2dxEditBox.kEndActionReturn;
+                        } else if (actionId == EditorInfo.IME_ACTION_DONE) {
                             Cocos2dxEditBoxHelper.closeKeyboardOnUiThread(index);
                         }
                         return false;
@@ -336,7 +335,7 @@ public class Cocos2dxEditBoxHelper {
                 if (editBox != null) {
                     editBox.setChangedTextProgrammatically(true);
                     editBox.setText(text);
-                    int position = editBox.getText().length();
+                    int position = text.length();
                     editBox.setSelection(position);
                 }
             }

@@ -149,8 +149,7 @@ TextureFrame* TextureFrame::create()
 }
 
 TextureFrame::TextureFrame()
-    : _sprite(nullptr)
-    , _textureName("")
+    : _textureName("")
 {
 }
 

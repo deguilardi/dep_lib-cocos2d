@@ -89,13 +89,14 @@ public:
         AllocatorDiagnostics::instance()->untrackAllocator(this);
 #endif
 
-        while (_pages)
+        do
         {
             intptr_t* page = (intptr_t*)_pages;
             intptr_t* next = (intptr_t*)*page;
             ccAllocatorGlobal.deallocate(page);
             _pages = (void*)next;
         }
+        while (_pages);
     }
     
     // @brief

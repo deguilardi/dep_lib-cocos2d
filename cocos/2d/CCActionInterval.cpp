@@ -126,9 +126,9 @@ void ActionInterval::step(float dt)
     }
     
     
-    float updateDt = std::max(0.0f,                                  // needed for rewind. elapsed could be negative
-                              std::min(1.0f, _elapsed / _duration)
-                              );
+    float updateDt = MAX (0,                                  // needed for rewind. elapsed could be negative
+                           MIN(1, _elapsed / _duration)
+                           );
 
     if (sendUpdateEventToScript(updateDt, this)) return;
     
@@ -445,7 +445,9 @@ Repeat* Repeat::create(FiniteTimeAction *action, unsigned int times)
 
 bool Repeat::initWithAction(FiniteTimeAction *action, unsigned int times)
 {
-    if (action && ActionInterval::initWithDuration(action->getDuration() * times))
+    float d = action->getDuration() * times;
+
+    if (action && ActionInterval::initWithDuration(d))
     {
         _times = times;
         _innerAction = action;

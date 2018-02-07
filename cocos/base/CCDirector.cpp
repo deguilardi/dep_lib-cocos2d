@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
 Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2013 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
@@ -60,7 +60,6 @@ THE SOFTWARE.
 #include "base/CCAutoreleasePool.h"
 #include "base/CCConfiguration.h"
 #include "base/CCAsyncTaskPool.h"
-#include "base/ObjectFactory.h"
 #include "platform/CCApplication.h"
 
 #if CC_ENABLE_SCRIPT_BINDING
@@ -231,7 +230,6 @@ Director::~Director(void)
     CC_SAFE_RELEASE(_eventDispatcher);
     
     Configuration::destroyInstance();
-    ObjectFactory::destroyInstance();
 
     s_SharedDirector = nullptr;
 }
@@ -325,8 +323,7 @@ void Director::drawScene()
         _renderer->clearDrawStats();
         
         //render the scene
-        if(_openGLView)
-            _openGLView->renderScene(_runningScene, _renderer);
+        _openGLView->renderScene(_runningScene, _renderer);
         
         _eventDispatcher->dispatchEvent(_eventAfterVisit);
     }
@@ -867,18 +864,6 @@ Vec2 Director::getVisibleOrigin() const
     }
 }
 
-Rect Director::getSafeAreaRect() const
-{
-    if (_openGLView)
-    {
-        return _openGLView->getSafeAreaRect();
-    }
-    else
-    {
-        return Rect::ZERO;
-    }
-}
-
 // scene management
 
 void Director::runWithScene(Scene *scene)
@@ -1066,8 +1051,7 @@ void Director::reset()
     _runningScene = nullptr;
     _nextScene = nullptr;
 
-    if (_eventDispatcher)
-        _eventDispatcher->dispatchEvent(_eventResetDirector);
+    _eventDispatcher->dispatchEvent(_eventResetDirector);
     
     // cleanup scheduler
     getScheduler()->unscheduleAll();
@@ -1374,10 +1358,8 @@ void Director::createStatsLabel()
     getFPSImageData(&data, &dataLength);
 
     Image* image = new (std::nothrow) Image();
-    bool isOK = image ? image->initWithImageData(data, dataLength) : false;
+    bool isOK = image->initWithImageData(data, dataLength);
     if (! isOK) {
-        if(image)
-            delete image;
         CCLOGERROR("%s", "Fails: init fps_images");
         return;
     }

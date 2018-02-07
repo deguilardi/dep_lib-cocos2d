@@ -32,18 +32,17 @@ namespace ui {
 
 static const float CHECK_EDITBOX_POSITION_INTERVAL = 0.1f;
 
-EditBox::EditBox()
+EditBox::EditBox(void)
 : _editBoxImpl(nullptr)
 , _delegate(nullptr)
 , _backgroundSprite(nullptr)
-, _adjustHeight(0.f)
 #if CC_ENABLE_SCRIPT_BINDING
 , _scriptEditBoxHandler(0)
 #endif
 {
 }
 
-EditBox::~EditBox()
+EditBox::~EditBox(void)
 {
     CC_SAFE_DELETE(_editBoxImpl);
 #if CC_ENABLE_SCRIPT_BINDING
@@ -180,7 +179,7 @@ void EditBox::setText(const char* pText)
     }
 }
 
-const char* EditBox::getText() const
+const char* EditBox::getText(void) const
 {
     if (_editBoxImpl != nullptr)
     {
@@ -213,7 +212,7 @@ void EditBox::setFontName(const char* pFontName)
     }
 }
 
-const char* EditBox::getFontName() const
+const char* EditBox::getFontName(void) const
 {
     if (_editBoxImpl != nullptr)
     {
@@ -340,7 +339,7 @@ void EditBox::setPlaceHolder(const char* pText)
     }
 }
 
-const char* EditBox::getPlaceHolder() const
+const char* EditBox::getPlaceHolder(void) const
 {
     if (_editBoxImpl != nullptr)
     {
@@ -495,7 +494,7 @@ void EditBox::draw(Renderer *renderer, const Mat4 &parentTransform, uint32_t par
     }
 }
 
-void EditBox::onEnter()
+void EditBox::onEnter(void)
 {
 #if CC_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeJavascript)
@@ -523,7 +522,7 @@ void EditBox::updatePosition(float dt)
 }
 
 
-void EditBox::onExit()
+void EditBox::onExit(void)
 {
 #if CC_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeJavascript)
@@ -598,7 +597,7 @@ void EditBox::registerScriptEditBoxHandler(int handler)
     _scriptEditBoxHandler = handler;
 }
 
-void EditBox::unregisterScriptEditBoxHandler()
+void EditBox::unregisterScriptEditBoxHandler(void)
 {
     if (0 != _scriptEditBoxHandler)
     {

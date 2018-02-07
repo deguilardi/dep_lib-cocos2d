@@ -52,7 +52,6 @@ int AudioDecoderWav::onWavSeek(void* datasource, long offset, int whence)
 
 int AudioDecoderWav::onWavClose(void* datasource)
 {
-    return 0;
 }
 
 bool AudioDecoderWav::decodeToPcm()

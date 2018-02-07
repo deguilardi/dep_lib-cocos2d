@@ -86,7 +86,6 @@ public:
 public:
     DictMaker()
         : _resultType(SAX_RESULT_NONE)
-        , _state(SAX_NONE)
     {
     }
 
@@ -376,12 +375,12 @@ bool FileUtils::writeValueMapToFile(const ValueMap& dict, const std::string& ful
     doc->LinkEndChild(docType);
 
     tinyxml2::XMLElement *rootEle = doc->NewElement("plist");
+    rootEle->SetAttribute("version", "1.0");
     if (nullptr == rootEle)
     {
         delete doc;
         return false;
     }
-    rootEle->SetAttribute("version", "1.0");
     doc->LinkEndChild(rootEle);
 
     tinyxml2::XMLElement *innerDict = generateElementForDict(dict, doc);
@@ -416,12 +415,12 @@ bool FileUtils::writeValueVectorToFile(const ValueVector& vecData, const std::st
     doc->LinkEndChild(docType);
 
     tinyxml2::XMLElement *rootEle = doc->NewElement("plist");
+    rootEle->SetAttribute("version", "1.0");
     if (nullptr == rootEle)
     {
         delete doc;
         return false;
     }
-    rootEle->SetAttribute("version", "1.0");
     doc->LinkEndChild(rootEle);
 
     tinyxml2::XMLElement *innerDict = generateElementForArray(vecData, doc);
@@ -998,7 +997,15 @@ void FileUtils::addSearchPath(const std::string &searchpath,const bool front)
         _searchPathArray.insert(_searchPathArray.begin(), path);
     } else {
         _originalSearchPaths.push_back(searchpath);
-        _searchPathArray.push_back(path);
+
+        if (!_searchPathArray.empty() && _searchPathArray[_searchPathArray.size()-1] == _defaultResRootPath)
+        {
+            _searchPathArray.insert(_searchPathArray.begin() + _searchPathArray.size() -1, path);
+        }
+        else
+        {
+            _searchPathArray.push_back(path);
+        }
     }
 }
 

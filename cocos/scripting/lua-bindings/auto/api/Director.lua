@@ -17,7 +17,7 @@
 -- js NA
 -- @function [parent=#Director] pushProjectionMatrix 
 -- @param self
--- @param #unsigned int index
+-- @param #unsigned long index
 -- @return Director#Director self (return value: cc.Director)
         
 --------------------------------
@@ -26,7 +26,7 @@
 -- js NA
 -- @function [parent=#Director] popProjectionMatrix 
 -- @param self
--- @param #unsigned int index
+-- @param #unsigned long index
 -- @return Director#Director self (return value: cc.Director)
         
 --------------------------------
@@ -44,7 +44,7 @@
 -- js NA
 -- @function [parent=#Director] loadProjectionIdentityMatrix 
 -- @param self
--- @param #unsigned int index
+-- @param #unsigned long index
 -- @return Director#Director self (return value: cc.Director)
         
 --------------------------------
@@ -56,12 +56,6 @@
 -- @param self
 -- @param #float scaleFactor
 -- @return Director#Director self (return value: cc.Director)
-        
---------------------------------
--- 
--- @function [parent=#Director] getDeltaTime 
--- @param self
--- @return float#float ret (return value: float)
         
 --------------------------------
 -- Gets content scale factor.<br>
@@ -77,10 +71,10 @@
 -- @return size_table#size_table ret (return value: size_table)
         
 --------------------------------
--- Returns safe area rectangle of the OpenGL view in points.
--- @function [parent=#Director] getSafeAreaRect 
+-- 
+-- @function [parent=#Director] getDeltaTime 
 -- @param self
--- @return rect_table#rect_table ret (return value: rect_table)
+-- @return float#float ret (return value: float)
         
 --------------------------------
 --  Sets the OpenGL default values.<br>
@@ -239,7 +233,7 @@
 -- @function [parent=#Director] multiplyProjectionMatrix 
 -- @param self
 -- @param #mat4_table mat
--- @param #unsigned int index
+-- @param #unsigned long index
 -- @return Director#Director self (return value: cc.Director)
         
 --------------------------------
@@ -480,7 +474,7 @@
 -- @function [parent=#Director] loadProjectionMatrix 
 -- @param self
 -- @param #mat4_table mat
--- @param #unsigned int index
+-- @param #unsigned long index
 -- @return Director#Director self (return value: cc.Director)
         
 --------------------------------
@@ -489,7 +483,7 @@
 -- js NA
 -- @function [parent=#Director] initProjectionMatrixStack 
 -- @param self
--- @param #unsigned int stackCount
+-- @param #unsigned long stackCount
 -- @return Director#Director self (return value: cc.Director)
         
 --------------------------------

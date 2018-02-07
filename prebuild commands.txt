@@ -1,0 +1,5 @@
+# cocos build android
+cocos gen-libs -pandroid --app-abi armeabi-v7a:x86 --ap android-16
+
+# cocos build ios
+cocos gen-libs -pios

@@ -2411,16 +2411,6 @@ bool
 },
 
 /**
- * @method getSafeAreaRect
- * @return {rect_object}
- */
-getSafeAreaRect : function (
-)
-{
-    return cc.Rect;
-},
-
-/**
  * @method getVR
  * @return {cc.VRIRenderer}
  */
@@ -2733,20 +2723,20 @@ pause : function (
 
 /**
  * @method pushProjectionMatrix
- * @param {unsigned int} arg0
+ * @param {unsigned long} arg0
  */
 pushProjectionMatrix : function (
-int 
+long 
 )
 {
 },
 
 /**
  * @method popProjectionMatrix
- * @param {unsigned int} arg0
+ * @param {unsigned long} arg0
  */
 popProjectionMatrix : function (
-int 
+long 
 )
 {
 },
@@ -2763,10 +2753,10 @@ eventdispatcher
 
 /**
  * @method loadProjectionIdentityMatrix
- * @param {unsigned int} arg0
+ * @param {unsigned long} arg0
  */
 loadProjectionIdentityMatrix : function (
-int 
+long 
 )
 {
 },
@@ -2779,16 +2769,6 @@ setContentScaleFactor : function (
 float 
 )
 {
-},
-
-/**
- * @method getDeltaTime
- * @return {float}
- */
-getDeltaTime : function (
-)
-{
-    return 0;
 },
 
 /**
@@ -2812,13 +2792,13 @@ getWinSizeInPixels : function (
 },
 
 /**
- * @method getSafeAreaRect
- * @return {rect_object}
+ * @method getDeltaTime
+ * @return {float}
  */
-getSafeAreaRect : function (
+getDeltaTime : function (
 )
 {
-    return cc.Rect;
+    return 0;
 },
 
 /**
@@ -3028,11 +3008,11 @@ scheduler
 /**
  * @method multiplyProjectionMatrix
  * @param {mat4_object} arg0
- * @param {unsigned int} arg1
+ * @param {unsigned long} arg1
  */
 multiplyProjectionMatrix : function (
 mat4, 
-int 
+long 
 )
 {
 },
@@ -3310,21 +3290,21 @@ getVisibleSize : function (
 /**
  * @method loadProjectionMatrix
  * @param {mat4_object} arg0
- * @param {unsigned int} arg1
+ * @param {unsigned long} arg1
  */
 loadProjectionMatrix : function (
 mat4, 
-int 
+long 
 )
 {
 },
 
 /**
  * @method initProjectionMatrixStack
- * @param {unsigned int} arg0
+ * @param {unsigned long} arg0
  */
 initProjectionMatrixStack : function (
-int 
+long 
 )
 {
 },
@@ -7738,11 +7718,11 @@ event
 
 /**
  * @method hasEventListener
- * @param {String} arg0
+ * @param {std::basic_string<char>} arg0
  * @return {bool}
  */
 hasEventListener : function (
-str 
+basic_string<char> 
 )
 {
     return false;
@@ -10955,7 +10935,7 @@ node
  * @method getNumberOfRunningActionsInTargetByTag
  * @param {cc.Node} arg0
  * @param {int} arg1
- * @return {unsigned int}
+ * @return {unsigned long}
  */
 getNumberOfRunningActionsInTargetByTag : function (
 node, 
@@ -15064,14 +15044,6 @@ isEnabled : function (
 },
 
 /**
- * @method alignItemsHorizontally
- */
-alignItemsHorizontally : function (
-)
-{
-},
-
-/**
  * @method alignItemsHorizontallyWithPadding
  * @param {float} arg0
  */
@@ -15087,6 +15059,14 @@ float
  */
 alignItemsVerticallyWithPadding : function (
 float 
+)
+{
+},
+
+/**
+ * @method alignItemsHorizontally
+ */
+alignItemsHorizontally : function (
 )
 {
 },
@@ -22862,7 +22842,7 @@ cc.TextFieldTTF = {
 
 /**
  * @method getCharCount
- * @return {unsigned int}
+ * @return {unsigned long}
  */
 getCharCount : function (
 )
@@ -23024,10 +23004,10 @@ getPlaceHolder : function (
 
 /**
  * @method setCursorPosition
- * @param {unsigned int} arg0
+ * @param {unsigned long} arg0
  */
 setCursorPosition : function (
-int 
+long 
 )
 {
 },

@@ -118,6 +118,7 @@ const char * Application::getCurrentCountryCode(){
     return code;
 }
 
+
 LanguageType Application::getCurrentLanguage()
 {
     std::string languageName = JniHelper::callStaticStringMethod(helperClassName, "getCurrentLanguage");

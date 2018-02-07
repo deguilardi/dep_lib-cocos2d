@@ -160,7 +160,7 @@ public:
     void addCommand(RenderCommand* command);
 
     /** Adds a `RenderComamnd` into the renderer specifying a particular render queue ID */
-    void addCommand(RenderCommand* command, int renderQueueID);
+    void addCommand(RenderCommand* command, int renderQueue);
 
     /** Pushes a group into the render queue */
     void pushGroup(int renderQueueID);

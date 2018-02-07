@@ -56,7 +56,7 @@ THE SOFTWARE.
 NS_CC_BEGIN
 
 // FIXME:: Yes, nodes might have a sort problem once every 30 days if the game runs at 60 FPS and each frame sprites are reordered.
-std::uint32_t Node::s_globalOrderOfArrival = 0;
+unsigned int Node::s_globalOrderOfArrival = 0;
 int Node::__attachedNodeCount = 0;
 
 // MARK: Constructor, Destructor, Init
@@ -83,7 +83,8 @@ Node::Node()
 , _transformUpdated(true)
 // children (lazy allocs)
 // lazy alloc
-, _localZOrder$Arrival(0LL)
+, _localZOrderAndArrival(0)
+, _localZOrder(0)
 , _globalZOrder(0)
 , _parent(nullptr)
 // "whole screen" objects. like Scenes and Layers, should set _ignoreAnchorPointForPosition to true
@@ -217,15 +218,7 @@ void Node::cleanup()
     // timers
     this->unscheduleAllCallbacks();
 
-    // NOTE: Although it was correct that removing event listeners associated with current node in Node::cleanup.
-    // But it broke the compatibility to the versions before v3.16 .
-    // User code may call `node->removeFromParent(true)` which will trigger node's cleanup method, when the node 
-    // is added to scene again, event listeners like EventListenerTouchOneByOne will be lost. 
-    // In fact, user's code should use `node->removeFromParent(false)` in order not to do a cleanup and just remove node
-    // from its parent. For more discussion about why we revert this change is at https://github.com/cocos2d/cocos2d-x/issues/18104.
-    // We need to consider more before we want to correct the old and wrong logic code.
-    // For now, compatiblity is the most important for our users.
-//    _eventDispatcher->removeEventListenersForTarget(this);
+    _eventDispatcher->removeEventListenersForTarget(this);
     
     for( const auto &child: _children)
         child->cleanup();
@@ -266,7 +259,7 @@ void Node::setSkewY(float skewY)
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
 
-void Node::setLocalZOrder(std::int32_t z)
+void Node::setLocalZOrder(int z)
 {
     if (getLocalZOrder() == z)
         return;
@@ -282,14 +275,15 @@ void Node::setLocalZOrder(std::int32_t z)
 
 /// zOrder setter : private method
 /// used internally to alter the zOrder variable. DON'T call this method manually
-void Node::_setLocalZOrder(std::int32_t z)
+void Node::_setLocalZOrder(int z)
 {
+    _localZOrderAndArrival = (static_cast<std::int64_t>(z) << 32) | (_localZOrderAndArrival & 0xffffffff);
     _localZOrder = z;
 }
 
 void Node::updateOrderOfArrival()
 {
-    _orderOfArrival = (++s_globalOrderOfArrival);
+    _localZOrderAndArrival = (_localZOrderAndArrival & 0xffffffff00000000) | (++s_globalOrderOfArrival);
 }
 
 void Node::setGlobalZOrder(float globalZOrder)

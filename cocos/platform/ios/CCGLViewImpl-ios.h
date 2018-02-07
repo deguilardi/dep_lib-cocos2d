@@ -56,7 +56,6 @@ public:
     static void convertAttrs();
     static void* _pixelFormat;
     static int _depthFormat;
-    static int _multisamplingCount;
 
     /** sets the content scale factor */
     virtual bool setContentScaleFactor(float contentScaleFactor) override;
@@ -75,8 +74,6 @@ public:
     virtual void end() override;
     virtual void swapBuffers() override;
     virtual void setIMEKeyboardState(bool bOpen) override;
-
-    virtual Rect getSafeAreaRect() const override;
 
 protected:
     GLViewImpl();

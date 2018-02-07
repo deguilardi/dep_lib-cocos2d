@@ -103,8 +103,7 @@ class ResizableBufferAdapter<Data> : public ResizableBuffer {
 public:
     explicit ResizableBufferAdapter(BufferType* buffer) : _buffer(buffer) {}
     virtual void resize(size_t size) override {
-        size_t oldSize = static_cast<size_t>(_buffer->getSize());
-        if (oldSize != size) {
+        if (static_cast<size_t>(_buffer->getSize()) < size) {
             auto old = _buffer->getBytes();
             void* buffer = realloc(old, size);
             if (buffer)

@@ -76,8 +76,7 @@ bool JSB_cpConstraint_getBodyA(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpConstraintGetBodyA((cpConstraint*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpBody_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpBody_class, "cpBody" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpBody_object), JSB_cpBody_class, "cpBody" ));
 
 	return true;
 }
@@ -95,8 +94,7 @@ bool JSB_cpConstraint_getBodyB(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpConstraintGetBodyB((cpConstraint*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpBody_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpBody_class, "cpBody" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpBody_object), JSB_cpBody_class, "cpBody" ));
 
 	return true;
 }
@@ -204,8 +202,7 @@ bool JSB_cpConstraint_getSpace(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpConstraintGetSpace((cpConstraint*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpSpace_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpSpace_class, "cpSpace" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpSpace_object), JSB_cpSpace_class, "cpSpace" ));
 
 	return true;
 }
@@ -529,8 +526,7 @@ void JSB_cpConstraint_createClass(JSContext *cx, JS::HandleObject globalObj, con
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpBase_object);
-	JSB_cpConstraint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpConstraint_class, JSB_cpConstraint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpConstraint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpBase_object), JSB_cpConstraint_class, JSB_cpConstraint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -736,8 +732,7 @@ void JSB_cpGrooveJoint_createClass(JSContext *cx, JS::HandleObject globalObj, co
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpGrooveJoint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpGrooveJoint_class, JSB_cpGrooveJoint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpGrooveJoint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpGrooveJoint_class, JSB_cpGrooveJoint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -855,8 +850,7 @@ void JSB_cpSimpleMotor_createClass(JSContext *cx, JS::HandleObject globalObj, co
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpSimpleMotor_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpSimpleMotor_class, JSB_cpSimpleMotor_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpSimpleMotor_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpSimpleMotor_class, JSB_cpSimpleMotor_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -1017,8 +1011,7 @@ void JSB_cpPivotJoint_createClass(JSContext *cx, JS::HandleObject globalObj, con
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpPivotJoint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpPivotJoint_class, JSB_cpPivotJoint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpPivotJoint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpPivotJoint_class, JSB_cpPivotJoint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -1223,8 +1216,7 @@ void JSB_cpPinJoint_createClass(JSContext *cx, JS::HandleObject globalObj, const
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpPinJoint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpPinJoint_class, JSB_cpPinJoint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpPinJoint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpPinJoint_class, JSB_cpPinJoint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -1474,8 +1466,7 @@ void JSB_cpSlideJoint_createClass(JSContext *cx, JS::HandleObject globalObj, con
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpSlideJoint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpSlideJoint_class, JSB_cpSlideJoint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpSlideJoint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpSlideJoint_class, JSB_cpSlideJoint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -1637,8 +1628,7 @@ void JSB_cpGearJoint_createClass(JSContext *cx, JS::HandleObject globalObj, cons
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpGearJoint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpGearJoint_class, JSB_cpGearJoint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpGearJoint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpGearJoint_class, JSB_cpGearJoint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -1844,8 +1834,7 @@ void JSB_cpDampedRotarySpring_createClass(JSContext *cx, JS::HandleObject global
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpDampedRotarySpring_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpDampedRotarySpring_class, JSB_cpDampedRotarySpring_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpDampedRotarySpring_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpDampedRotarySpring_class, JSB_cpDampedRotarySpring_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -2139,8 +2128,7 @@ void JSB_cpDampedSpring_createClass(JSContext *cx, JS::HandleObject globalObj, c
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpDampedSpring_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpDampedSpring_class, JSB_cpDampedSpring_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpDampedSpring_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpDampedSpring_class, JSB_cpDampedSpring_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -2345,8 +2333,7 @@ void JSB_cpRatchetJoint_createClass(JSContext *cx, JS::HandleObject globalObj, c
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpRatchetJoint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpRatchetJoint_class, JSB_cpRatchetJoint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpRatchetJoint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpRatchetJoint_class, JSB_cpRatchetJoint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -2508,8 +2495,7 @@ void JSB_cpRotaryLimitJoint_createClass(JSContext *cx, JS::HandleObject globalOb
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpConstraint_object);
-	JSB_cpRotaryLimitJoint_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpRotaryLimitJoint_class, JSB_cpRotaryLimitJoint_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpRotaryLimitJoint_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpConstraint_object), JSB_cpRotaryLimitJoint_class, JSB_cpRotaryLimitJoint_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -3104,8 +3090,7 @@ void JSB_cpArbiter_createClass(JSContext *cx, JS::HandleObject globalObj, const 
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpBase_object);
-	JSB_cpArbiter_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpArbiter_class, JSB_cpArbiter_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpArbiter_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpBase_object), JSB_cpArbiter_class, JSB_cpArbiter_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -3395,8 +3380,7 @@ bool JSB_cpSpace_getStaticBody(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpSpaceGetStaticBody((cpSpace*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpBody_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpBody_class, "cpBody" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpBody_object), JSB_cpBody_class, "cpBody" ));
 
 	return true;
 }
@@ -3414,8 +3398,7 @@ bool JSB_cpSpace_init(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpSpaceInit((cpSpace*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpSpace_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpSpace_class, "cpSpace" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpSpace_object), JSB_cpSpace_class, "cpSpace" ));
 
 	return true;
 }
@@ -3796,8 +3779,7 @@ void JSB_cpSpace_createClass(JSContext *cx, JS::HandleObject globalObj, const ch
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpBase_object);
-	JSB_cpSpace_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpSpace_class, JSB_cpSpace_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpSpace_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpBase_object), JSB_cpSpace_class, JSB_cpSpace_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -4134,8 +4116,7 @@ bool JSB_cpBody_getSpace(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpBodyGetSpace((cpBody*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpSpace_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpSpace_class, "cpSpace" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpSpace_object), JSB_cpSpace_class, "cpSpace" ));
 
 	return true;
 }
@@ -4262,8 +4243,7 @@ bool JSB_cpBody_init(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpBodyInit((cpBody*)arg0 , (cpFloat)arg1 , (cpFloat)arg2  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpBody_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpBody_class, "cpBody" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpBody_object), JSB_cpBody_class, "cpBody" ));
 
 	return true;
 }
@@ -4737,8 +4717,7 @@ void JSB_cpBody_createClass(JSContext *cx, JS::HandleObject globalObj, const cha
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpBase_object);
-	JSB_cpBody_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpBody_class, JSB_cpBody_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpBody_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpBase_object), JSB_cpBody_class, JSB_cpBody_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -4883,8 +4862,7 @@ bool JSB_cpShape_getBody(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpShapeGetBody((cpShape*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpBody_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpBody_class, "cpBody" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpBody_object), JSB_cpBody_class, "cpBody" ));
 
 	return true;
 }
@@ -5064,8 +5042,7 @@ bool JSB_cpShape_getSpace(JSContext *cx, uint32_t argc, jsval *vp) {
 
 	ret_val = cpShapeGetSpace((cpShape*)arg0  );
 
-	JS::RootedObject rootedObj(cx, JSB_cpSpace_object);
-	args.rval().set(c_class_to_jsval( cx, ret_val, rootedObj, JSB_cpSpace_class, "cpSpace" ));
+	args.rval().set(c_class_to_jsval( cx, ret_val, JS::RootedObject(cx,JSB_cpSpace_object), JSB_cpSpace_class, "cpSpace" ));
 
 	return true;
 }
@@ -5372,8 +5349,7 @@ void JSB_cpShape_createClass(JSContext *cx, JS::HandleObject globalObj, const ch
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpBase_object);
-	JSB_cpShape_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpShape_class, JSB_cpShape_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpShape_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpBase_object), JSB_cpShape_class, JSB_cpShape_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -5486,8 +5462,7 @@ void JSB_cpCircleShape_createClass(JSContext *cx, JS::HandleObject globalObj, co
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpShape_object);
-	JSB_cpCircleShape_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpCircleShape_class, JSB_cpCircleShape_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpCircleShape_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpShape_object), JSB_cpCircleShape_class, JSB_cpCircleShape_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -5664,8 +5639,7 @@ void JSB_cpSegmentShape_createClass(JSContext *cx, JS::HandleObject globalObj, c
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpShape_object);
-	JSB_cpSegmentShape_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpSegmentShape_class, JSB_cpSegmentShape_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpSegmentShape_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpShape_object), JSB_cpSegmentShape_class, JSB_cpSegmentShape_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 /*
@@ -5779,8 +5753,7 @@ void JSB_cpPolyShape_createClass(JSContext *cx, JS::HandleObject globalObj, cons
 		JS_FS_END
 	};
 
-	JS::RootedObject rootedObj(cx, JSB_cpShape_object);
-	JSB_cpPolyShape_object = JS_InitClass(cx, globalObj, rootedObj, JSB_cpPolyShape_class, JSB_cpPolyShape_constructor,0,properties,funcs,NULL,st_funcs);
+	JSB_cpPolyShape_object = JS_InitClass(cx, globalObj, JS::RootedObject(cx,JSB_cpShape_object), JSB_cpPolyShape_class, JSB_cpPolyShape_constructor,0,properties,funcs,NULL,st_funcs);
 }
 
 

@@ -22,110 +22,16 @@
  THE SOFTWARE.
  ****************************************************************************/
 #include "scripting/lua-bindings/manual/network/lua_xml_http_request.h"
+#include <string>
 #include "scripting/lua-bindings/manual/tolua_fix.h"
 #include "scripting/lua-bindings/manual/CCLuaStack.h"
 #include "scripting/lua-bindings/manual/CCLuaValue.h"
 #include "scripting/lua-bindings/manual/CCLuaEngine.h"
 #include "scripting/lua-bindings/manual/cocos2d/LuaScriptHandlerMgr.h"
 
-#include "network/HttpClient.h"
-
-#include <unordered_map>
-#include <string>
-#include <sstream>
 
 using namespace cocos2d;
-
-class LuaMinXmlHttpRequest : public cocos2d::Ref
-{
-public:
-    enum class ResponseType
-    {
-        STRING,
-        ARRAY_BUFFER,
-        BLOB,
-        DOCUMENT,
-        JSON
-    };
-
-    // Ready States (http://www.w3.org/TR/XMLHttpRequest/#interface-xmlhttprequest)
-    static const unsigned short UNSENT = 0;
-    static const unsigned short OPENED = 1;
-    static const unsigned short HEADERS_RECEIVED = 2;
-    static const unsigned short LOADING = 3;
-    static const unsigned short DONE = 4;
-
-    LuaMinXmlHttpRequest();
-    ~LuaMinXmlHttpRequest();
-
-    inline void setResponseType(ResponseType type) { _responseType = type; }
-    inline ResponseType getResponseType() const { return _responseType; }
-
-    inline void setWithCredentialsValue(bool value) { _withCredentialsValue = value; }
-    inline bool getWithCredentialsValue() const { return _withCredentialsValue; }
-
-    inline void setTimeout(unsigned timeOut) {_timeout = timeOut; }
-    inline unsigned getTimeout() const { return _timeout;}
-
-    inline void setReadyState(int readyState) { _readyState = readyState; }
-    inline int getReadyState() const { return _readyState ;}
-
-    inline cocos2d::network::HttpRequest* getHttpRequest() const { return _httpRequest; }
-    inline const std::string& getStatusText() const { return _statusText ;}
-
-    inline void setStatus(int status) { _status = status; }
-    inline int getStatus() { return _status; }
-
-    inline const std::string& getUrl() { return _url; }
-    inline void setUrl(const std::string& url) { _url = url ;}
-
-    inline const std::string& getMethod() const { return _meth;}
-    inline void setMethod(const std::string& meth) { _meth = meth ; }
-
-    inline void setAsync(bool isAsync) { _isAsync = isAsync; }
-    inline void setIsNetWork(bool isNetWork) {_isNetwork = isNetWork; }
-
-    void _setHttpRequestHeader();
-    void _sendRequest();
-    void setRequestHeader(const char* field, const char* value);
-
-    const std::unordered_map<std::string, std::string>& getHttpHeader() const { return _httpHeader ;}
-    void clearHttpHeader() { _httpHeader.clear(); }
-
-    void getByteData(unsigned char* byteData) const;
-
-    inline const std::string& getDataStr() const { return _data; }
-
-    inline size_t getDataSize() const { return _dataSize; }
-
-    inline void setErrorFlag(bool errorFlag) { _errorFlag = errorFlag; }
-    inline bool getErrorFlag() const { return _errorFlag; }
-
-    inline void setAborted(bool isAborted) { _isAborted = isAborted; }
-    inline bool isAborted() const { return _isAborted; }
-
-private:
-    void _gotHeader(const std::string& header);
-
-    std::string                          _url;
-    std::string                          _meth;
-    std::string                          _type;
-    std::string                          _data;
-    size_t                               _dataSize;
-    int                                  _readyState;
-    int                                  _status;
-    std::string                          _statusText;
-    ResponseType                         _responseType;
-    unsigned                             _timeout;
-    bool                                 _isAsync;
-    cocos2d::network::HttpRequest*       _httpRequest;
-    bool                                 _isNetwork;
-    bool                                 _withCredentialsValue;
-    std::unordered_map<std::string, std::string>   _httpHeader;
-    std::unordered_map<std::string, std::string>   _requestHeader;
-    bool                                 _errorFlag;
-    bool                                 _isAborted;
-};
+using namespace std;
 
 LuaMinXmlHttpRequest::LuaMinXmlHttpRequest()
 :
@@ -160,7 +66,7 @@ LuaMinXmlHttpRequest::~LuaMinXmlHttpRequest()
  *  @brief Implementation for header retrieving.
  *  @param header
  */
-void LuaMinXmlHttpRequest::_gotHeader(const std::string& header)
+void LuaMinXmlHttpRequest::_gotHeader(string header)
 {
 	// Get Header and Set StatusText
     // Split String into Tokens
@@ -172,8 +78,8 @@ void LuaMinXmlHttpRequest::_gotHeader(const std::string& header)
     if (found_header_field != std::string::npos)
     {
         // Found a header field.
-        std::string http_field;
-        std::string http_value;
+        string http_field;
+        string http_value;
         
         http_field = header.substr(0,found_header_field);
         http_value = header.substr(found_header_field+1, header.length());
@@ -193,10 +99,11 @@ void LuaMinXmlHttpRequest::_gotHeader(const std::string& header)
         strcpy(cstr, header.c_str());
         
         pch = strtok(cstr," ");
-        while (pch != nullptr)
+        while (pch != NULL)
         {
-            std::stringstream ss;
-            std::string val;
+            
+            stringstream ss;
+            string val;
             
             ss << pch;
             val = ss.str();
@@ -205,7 +112,7 @@ void LuaMinXmlHttpRequest::_gotHeader(const std::string& header)
             // Check for HTTP Header to set statusText
             if (found_http != std::string::npos) {
                 
-                std::stringstream mystream;
+                stringstream mystream;
                 
                 // Get Response Status
                 pch = strtok (NULL, " ");
@@ -232,11 +139,11 @@ void LuaMinXmlHttpRequest::_gotHeader(const std::string& header)
  */
 void LuaMinXmlHttpRequest::setRequestHeader(const char* field, const char* value)
 {
-    std::stringstream header_s;
-    std::stringstream value_s;
-    std::string header;
+    stringstream header_s;
+    stringstream value_s;
+    string header;
     
-    auto iter = _requestHeader.find(field);
+    map<string, string>::iterator iter = _requestHeader.find(field);
     
     // Concatenate values when header exists.
     if (iter != _requestHeader.end())
@@ -257,7 +164,7 @@ void LuaMinXmlHttpRequest::setRequestHeader(const char* field, const char* value
  */
 void LuaMinXmlHttpRequest::_setHttpRequestHeader()
 {
-    std::vector<std::string> header;
+    std::vector<string> header;
     
     for (auto it = _requestHeader.begin(); it != _requestHeader.end(); ++it)
     {
@@ -363,7 +270,7 @@ void LuaMinXmlHttpRequest::_sendRequest()
     retain();
 }
 
-void LuaMinXmlHttpRequest::getByteData(unsigned char* byteData) const
+void LuaMinXmlHttpRequest::getByteData(unsigned char* byteData)
 {
     memcpy((char*)byteData, _data.c_str(), _dataSize);
 }
@@ -925,7 +832,7 @@ static int lua_cocos2dx_XMLHttpRequest_send(lua_State* L)
 		return 0;
     }
 #endif
-    self->clearHttpHeader();
+    self->getHttpHeader().clear();
     self->setErrorFlag(false);
     
     argc = lua_gettop(L) - 1;
@@ -1048,8 +955,8 @@ static int lua_cocos2dx_XMLHttpRequest_getAllResponseHeaders(lua_State* L)
     int argc = 0;
     LuaMinXmlHttpRequest* self = nullptr;
     
-    std::stringstream responseheaders;
-    std::string responseheader = "";
+    stringstream responseheaders;
+    string responseheader = "";
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -1069,7 +976,7 @@ static int lua_cocos2dx_XMLHttpRequest_getAllResponseHeaders(lua_State* L)
     
     if ( 0 == argc )
     {
-        const auto& httpHeader = self->getHttpHeader();
+        map<string, string> httpHeader = self->getHttpHeader();
         
         for (auto it = httpHeader.begin(); it != httpHeader.end(); ++it)
         {
@@ -1095,7 +1002,7 @@ static int lua_cocos2dx_XMLHttpRequest_getResponseHeader(lua_State* L)
     int argc = 0;
     LuaMinXmlHttpRequest* self = nullptr;
     
-    std::string responseheader = "";
+    string responseheader = "";
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -1120,18 +1027,19 @@ static int lua_cocos2dx_XMLHttpRequest_getResponseHeader(lua_State* L)
             goto tolua_lerror;
 #endif
         responseheader = tolua_tostring(L, 2, "");
-
-        const auto& headers = self->getHttpHeader();
-        auto iter = headers.find(responseheader);
-        if (iter != headers.end())
+        
+        stringstream streamData;
+        streamData << responseheader;
+        
+        string value = streamData.str();
+        
+        
+        auto iter = self->getHttpHeader().find(value);
+        if (iter != self->getHttpHeader().end())
         {
             tolua_pushstring(L, (iter->second).c_str());
+            return 1;
         }
-        else
-        {
-            lua_pushnil(L);
-        }
-        return 1;
     }
     
     luaL_error(L, "'getResponseHeader' function of XMLHttpRequest wrong number of arguments: %d, was expecting %d\n", argc, 1);
@@ -1148,7 +1056,7 @@ static int lua_cocos2dx_XMLHttpRequest_registerScriptHandler(lua_State* L)
     int argc = 0;
     LuaMinXmlHttpRequest* self = nullptr;
     
-    std::string responseheader = "";
+    string responseheader = "";
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -1192,7 +1100,7 @@ static int lua_cocos2dx_XMLHttpRequest_unregisterScriptHandler(lua_State* L)
     int argc = 0;
     LuaMinXmlHttpRequest* self = nullptr;
     
-    std::string responseheader = "";
+    string responseheader = "";
     
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;

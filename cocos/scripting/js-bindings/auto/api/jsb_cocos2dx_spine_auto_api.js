@@ -117,26 +117,6 @@ setToSetupPose : function (
 },
 
 /**
- * @method setDebugMeshesEnabled
- * @param {bool} arg0
- */
-setDebugMeshesEnabled : function (
-bool 
-)
-{
-},
-
-/**
- * @method isTwoColorTint
- * @return {bool}
- */
-isTwoColorTint : function (
-)
-{
-    return false;
-},
-
-/**
  * @method getBlendFunc
  * @return {cc.BlendFunc}
  */
@@ -144,6 +124,14 @@ getBlendFunc : function (
 )
 {
     return cc.BlendFunc;
+},
+
+/**
+ * @method updateWorldTransform
+ */
+updateWorldTransform : function (
+)
+{
 },
 
 /**
@@ -185,41 +173,11 @@ getTimeScale : function (
 },
 
 /**
- * @method setTwoColorTint
- * @param {bool} arg0
- */
-setTwoColorTint : function (
-bool 
-)
-{
-},
-
-/**
- * @method getDebugMeshesEnabled
- * @return {bool}
- */
-getDebugMeshesEnabled : function (
-)
-{
-    return false;
-},
-
-/**
  * @method setBlendFunc
  * @param {cc.BlendFunc} arg0
  */
 setBlendFunc : function (
 blendfunc 
-)
-{
-},
-
-/**
- * @method setVertexEffect
- * @param {spVertexEffect} arg0
- */
-setVertexEffect : function (
-spvertexeffect 
 )
 {
 },
@@ -234,14 +192,6 @@ str
 )
 {
     return false;
-},
-
-/**
- * @method updateWorldTransform
- */
-updateWorldTransform : function (
-)
-{
 },
 
 /**
@@ -331,10 +281,12 @@ str
 },
 
 /**
- * @method setCompleteListener
- * @param {function} arg0
+ * @method setTrackEventListener
+ * @param {spTrackEntry} arg0
+ * @param {function} arg1
  */
-setCompleteListener : function (
+setTrackEventListener : function (
+sptrackentry, 
 func 
 )
 {
@@ -367,19 +319,17 @@ func
 },
 
 /**
- * @method addEmptyAnimation
- * @param {int} arg0
- * @param {float} arg1
- * @param {float} arg2
- * @return {spTrackEntry}
+ * @method onTrackEntryEvent
+ * @param {spTrackEntry} arg0
+ * @param {spEventType} arg1
+ * @param {spEvent} arg2
  */
-addEmptyAnimation : function (
-int, 
-float, 
-float 
+onTrackEntryEvent : function (
+sptrackentry, 
+speventtype, 
+spevent 
 )
 {
-    return spTrackEntry;
 },
 
 /**
@@ -400,20 +350,6 @@ func
 setTrackInterruptListener : function (
 sptrackentry, 
 func 
-)
-{
-},
-
-/**
- * @method onTrackEntryEvent
- * @param {spTrackEntry} arg0
- * @param {spEventType} arg1
- * @param {spEvent} arg2
- */
-onTrackEntryEvent : function (
-sptrackentry, 
-speventtype, 
-spevent 
 )
 {
 },
@@ -461,26 +397,10 @@ func
 },
 
 /**
- * @method setEmptyAnimation
- * @param {int} arg0
- * @param {float} arg1
- * @return {spTrackEntry}
+ * @method setCompleteListener
+ * @param {function} arg0
  */
-setEmptyAnimation : function (
-int, 
-float 
-)
-{
-    return spTrackEntry;
-},
-
-/**
- * @method setTrackEventListener
- * @param {spTrackEntry} arg0
- * @param {function} arg1
- */
-setTrackEventListener : function (
-sptrackentry, 
+setCompleteListener : function (
 func 
 )
 {
@@ -514,16 +434,6 @@ onAnimationStateEvent : function (
 sptrackentry, 
 speventtype, 
 spevent 
-)
-{
-},
-
-/**
- * @method setEmptyAnimations
- * @param {float} arg0
- */
-setEmptyAnimations : function (
-float 
 )
 {
 },

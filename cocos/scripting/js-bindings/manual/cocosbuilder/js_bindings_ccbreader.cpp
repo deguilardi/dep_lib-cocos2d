@@ -99,7 +99,7 @@ bool js_cocos2dx_CCBAnimationManager_animationCompleteCallback(JSContext *cx, ui
         js_proxy_t *p = jsb_get_js_proxy(obj);
         cocosbuilder::CCBAnimationManager *node = (cocosbuilder::CCBAnimationManager *)(p ? p->ptr : NULL);
         
-        JSCCBAnimationWrapper *tmpCobj = new (std::nothrow) JSCCBAnimationWrapper();
+        JSCCBAnimationWrapper *tmpCobj = new (std::nothrow) JSCCBAnimationWrapper(args.thisv());
         tmpCobj->autorelease();
         
         tmpCobj->setJSCallbackThis(args.get(0));

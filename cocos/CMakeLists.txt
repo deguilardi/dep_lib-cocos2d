@@ -151,7 +151,7 @@ foreach(pkg ZLIB MINIZIP JPEG PNG TIFF TinyXML2 FREETYPE WEBSOCKETS CURL OPENSSL
 endforeach()
 
 if(LINUX)
-  set(glfw_other_linker_flags X11 Xi Xrandr Xxf86vm Xinerama Xcursor rt m)
+  set(glfw_other_linker_flags X11)
 endif(LINUX)
 
 target_link_libraries(cocos2dInternal ${PLATFORM_SPECIFIC_LIBS} ${glfw_other_linker_flags})

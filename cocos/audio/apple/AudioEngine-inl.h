@@ -29,7 +29,6 @@
 #define __AUDIO_ENGINE_INL_H_
 
 #include <unordered_map>
-#include <list>
 
 #include "base/CCRef.h"
 #include "audio/apple/AudioCache.h"

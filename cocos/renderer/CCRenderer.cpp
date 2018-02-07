@@ -347,17 +347,17 @@ void Renderer::mapBuffers()
 
 void Renderer::addCommand(RenderCommand* command)
 {
-    int renderQueueID =_commandGroupStack.top();
-    addCommand(command, renderQueueID);
+    int renderQueue =_commandGroupStack.top();
+    addCommand(command, renderQueue);
 }
 
-void Renderer::addCommand(RenderCommand* command, int renderQueueID)
+void Renderer::addCommand(RenderCommand* command, int renderQueue)
 {
     CCASSERT(!_isRendering, "Cannot add command while rendering");
-    CCASSERT(renderQueueID >=0, "Invalid render queue");
+    CCASSERT(renderQueue >=0, "Invalid render queue");
     CCASSERT(command->getType() != RenderCommand::Type::UNKNOWN_COMMAND, "Invalid Command Type");
 
-    _renderGroups[renderQueueID].push_back(command);
+    _renderGroups[renderQueue].push_back(command);
 }
 
 void Renderer::pushGroup(int renderQueueID)
@@ -757,7 +757,7 @@ void Renderer::drawBatchedTriangles()
         // in the same batch ?
         if (batchable && (prevMaterialID == currentMaterialID || firstCommand))
         {
-            CC_ASSERT((firstCommand || _triBatchesToDraw[batchesTotal].cmd->getMaterialID() == cmd->getMaterialID()) && "argh... error in logic");
+            CC_ASSERT(firstCommand || _triBatchesToDraw[batchesTotal].cmd->getMaterialID() == cmd->getMaterialID() && "argh... error in logic");
             _triBatchesToDraw[batchesTotal].indicesToDraw += cmd->getIndexCount();
             _triBatchesToDraw[batchesTotal].cmd = cmd;
         }

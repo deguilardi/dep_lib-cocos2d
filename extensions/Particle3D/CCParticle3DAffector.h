@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2015 Chukong Technologies Inc.
+ Copyright (c) 2015-2017 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -27,6 +27,7 @@
 
 #include "base/CCRef.h"
 #include <vector>
+#include <map> //@guilardi
 
 NS_CC_BEGIN
 

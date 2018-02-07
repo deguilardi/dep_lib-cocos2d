@@ -72,19 +72,6 @@
         
 --------------------------------
 -- 
--- @function [parent=#SkeletonRenderer] setDebugMeshesEnabled 
--- @param self
--- @param #bool enabled
--- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
-        
---------------------------------
--- 
--- @function [parent=#SkeletonRenderer] isTwoColorTint 
--- @param self
--- @return bool#bool ret (return value: bool)
-        
---------------------------------
--- 
 -- @function [parent=#SkeletonRenderer] getBlendFunc 
 -- @param self
 -- @return BlendFunc#BlendFunc ret (return value: cc.BlendFunc)
@@ -116,29 +103,9 @@
         
 --------------------------------
 -- 
--- @function [parent=#SkeletonRenderer] setTwoColorTint 
--- @param self
--- @param #bool enabled
--- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
-        
---------------------------------
--- 
--- @function [parent=#SkeletonRenderer] getDebugMeshesEnabled 
--- @param self
--- @return bool#bool ret (return value: bool)
-        
---------------------------------
--- 
 -- @function [parent=#SkeletonRenderer] setBlendFunc 
 -- @param self
 -- @param #cc.BlendFunc blendFunc
--- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
-        
---------------------------------
--- 
--- @function [parent=#SkeletonRenderer] setVertexEffect 
--- @param self
--- @param #spVertexEffect effect
 -- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
         
 --------------------------------

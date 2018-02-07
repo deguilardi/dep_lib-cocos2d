@@ -27,57 +27,30 @@
 #include "platform/CCCommon.h"
 #include "base/CCConsole.h"
 #include "ConvertUTF.h"
-#include <limits>
 
 NS_CC_BEGIN
 
 namespace StringUtils {
 
-/*--- This a C++ universal sprintf in the future.
-**  @pitfall: The behavior of vsnprintf between VS2013 and VS2015/2017 is different
-**      VS2013 or Unix-Like System will return -1 when buffer not enough, but VS2015/2017 will return the actural needed length for buffer at this station
-**      The _vsnprintf behavior is compatible API which always return -1 when buffer isn't enough at VS2013/2015/2017
-**      Yes, The vsnprintf is more efficient implemented by MSVC 19.0 or later, AND it's also standard-compliant, see reference: http://www.cplusplus.com/reference/cstdio/vsnprintf/
-*/
 std::string format(const char* format, ...)
 {
-#define CC_VSNPRINTF_BUFFER_LENGTH 512
-    va_list args;
-    std::string buffer(CC_VSNPRINTF_BUFFER_LENGTH, '\0');
-
-    va_start(args, format);
-    int nret = vsnprintf(&buffer.front(), buffer.length(), format, args);
-    va_end(args);
-
-    if (nret >= 0) {
-        if (nret < buffer.length()) {
-            buffer.resize(nret);
-        }
-        else if (nret > buffer.length()) { // VS2015/2017 or later Visual Studio Version
-            buffer.resize(nret);
-
-            va_start(args, format);
-            nret = vsnprintf(&buffer.front(), buffer.length(), format, args);
-            va_end(args);
-
-            assert(nret == buffer.length());
-        }
-        // else equals, do nothing.
+#define CC_MAX_STRING_LENGTH (1024*100)
+    
+    std::string ret;
+    
+    va_list ap;
+    va_start(ap, format);
+    
+    char* buf = (char*)malloc(CC_MAX_STRING_LENGTH);
+    if (buf != nullptr)
+    {
+        vsnprintf(buf, CC_MAX_STRING_LENGTH, format, ap);
+        ret = buf;
+        free(buf);
     }
-    else { // less or equal VS2013 and Unix System glibc implement.
-        do {
-            buffer.resize(buffer.length() * 3 / 2);
-
-            va_start(args, format);
-            nret = vsnprintf(&buffer.front(), buffer.length(), format, args);
-            va_end(args);
-
-        } while (nret < 0);
-
-        buffer.resize(nret);
-    }
-
-    return buffer;
+    va_end(ap);
+    
+    return ret;
 }
 
 /*
@@ -140,7 +113,7 @@ static void trimUTF32VectorFromIndex(std::vector<char32_t>& str, int index)
  * */
 bool isUnicodeSpace(char32_t ch)
 {
-    return  (ch >= 0x0009 && ch <= 0x000D) || ch == 0x0020 || ch == 0x0085 || ch == 0x1680
+    return  (ch >= 0x0009 && ch <= 0x000D) || ch == 0x0020 || ch == 0x0085 || ch == 0x00A0 || ch == 0x1680
     || (ch >= 0x2000 && ch <= 0x200A) || ch == 0x2028 || ch == 0x2029 || ch == 0x202F
     ||  ch == 0x205F || ch == 0x3000;
 }
@@ -407,27 +380,11 @@ void StringUTF8::replace(const std::string& newStr)
 
 std::string StringUTF8::getAsCharSequence() const
 {
-    return getAsCharSequence(0, std::numeric_limits<std::size_t>::max());
-}
-
-std::string StringUTF8::getAsCharSequence(std::size_t pos) const
-{
-    return getAsCharSequence(pos, std::numeric_limits<std::size_t>::max());
-}
-
-std::string StringUTF8::getAsCharSequence(std::size_t pos, std::size_t len) const
-{
     std::string charSequence;
-    std::size_t maxLen = _str.size() - pos;
-    if (len > maxLen)
-    {
-        len = maxLen;
-    }
 
-    std::size_t endPos = len + pos;
-    while (pos < endPos)
+    for (auto& charUtf8 : _str)
     {
-        charSequence.append(_str[pos++]._char);
+        charSequence.append(charUtf8._char);
     }
 
     return charSequence;

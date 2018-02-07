@@ -63,7 +63,6 @@ FontFreeType * FontFreeType::create(const std::string &fontName, float fontSize,
         delete tempFont;
         return nullptr;
     }
-    tempFont->autorelease();
     return tempFont;
 }
 

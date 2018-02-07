@@ -78,6 +78,7 @@ bool ProgressTimer::initWithSprite(Sprite* sp)
     setSprite(sp);
 
     // shader state
+    // shader state
     // @guilardi
     // ml progressbar factory sends nullptr texture
     if( sp ){

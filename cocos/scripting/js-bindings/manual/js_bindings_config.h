@@ -116,7 +116,9 @@ JSAutoCompartment ac(cx, obj)
 #define JSB_ENSURE_AUTOCOMPARTMENT(cx, obj)
 #endif
 
-#define JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+#define JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET \
+JSAutoCompartment __jsb_ac(ScriptingCore::getInstance()->getGlobalContext(), ScriptingCore::getInstance()->getGlobalObject());
+
 
 /** @def JSB_INCLUDE_SYSTEM
  Whether or not it should include bindings for system components like LocalStorage

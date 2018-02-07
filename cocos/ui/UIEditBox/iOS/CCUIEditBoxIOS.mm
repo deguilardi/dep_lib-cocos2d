@@ -293,8 +293,7 @@
         if (self.keyboardReturnType == cocos2d::ui::EditBox::KeyboardReturnType::NEXT) {
             action = cocos2d::ui::EditBoxDelegate::EditBoxEndAction::TAB_TO_NEXT;
         } else if (self.keyboardReturnType == cocos2d::ui::EditBox::KeyboardReturnType::GO ||
-                   self.keyboardReturnType == cocos2d::ui::EditBox::KeyboardReturnType::SEND ||
-                   self.keyboardReturnType == cocos2d::ui::EditBox::KeyboardReturnType::SEARCH) {
+                 self.keyboardReturnType == cocos2d::ui::EditBox::KeyboardReturnType::SEND) {
             action = cocos2d::ui::EditBoxDelegate::EditBoxEndAction::RETURN;
         }
     }
